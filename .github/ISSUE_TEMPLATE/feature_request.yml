@@ -1,6 +1,6 @@
 name: Feature request
-description: Suggest an improvement for Recipe Fallback
-title: "[Feature]: "
+description: Suggest an improvement for Recipe QoL
+title: "feature: "
 labels:
   - enhancement
 assignees:
@@ -9,99 +9,34 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to suggest an improvement.
+        Use this form for feature ideas, UX improvements, and compatibility requests for Recipe QoL.
 
-        Please include enough detail to explain the problem first, then the behavior you want to see. Recipe Fallback is client-side only, so requests should focus on client behavior, compatibility, configuration, and presentation.
-  - type: dropdown
-    id: environment
-    attributes:
-      label: Where would this apply?
-      description: Choose the main environment this request is about.
-      options:
-        - Multiplayer server
-        - Singleplayer
-        - LAN world
-        - Realms
-        - Any environment
-    validations:
-      required: true
-  - type: input
-    id: server_or_pack
-    attributes:
-      label: Server or modpack
-      description: If relevant, name the server, pack, or setup this request is based on.
-      placeholder: Vanilla server, custom modpack, local instance, etc.
-  - type: checkboxes
-    id: optional_components
-    attributes:
-      label: Installed optional components
-      description: Select anything relevant to this request.
-      options:
-        - label: Mod Menu
-        - label: Roughly Enough Items (REI)
-        - label: Architectury-based mods
-        - label: Client-only resource packs or recipe-adding mods
-  - type: dropdown
-    id: area
-    attributes:
-      label: Area
-      description: Which part of the mod would this request affect?
-      options:
-        - Fallback behavior
-        - Recipe visibility or unlock handling
-        - Notifications or UI
-        - Config options
-        - Compatibility or integration
-        - Documentation
-        - Other
-    validations:
-      required: true
+        Recipe QoL is client-side only, so requests should stay focused on client behavior, recipe visibility, UI, compatibility, or configuration.
   - type: textarea
     id: problem
     attributes:
-      label: Problem or limitation
-      description: What problem are you trying to solve?
+      label: What problem are you trying to solve?
       placeholder: When connecting to certain servers, I need a way to...
     validations:
       required: true
   - type: textarea
     id: proposal
     attributes:
-      label: Proposed solution
-      description: Describe the behavior you want to see.
+      label: What change would you like?
       placeholder: Add an option that...
     validations:
       required: true
   - type: textarea
-    id: use_case
+    id: context
     attributes:
-      label: Example use case
-      description: Explain how this would help in practice.
-      placeholder: This would help when...
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Alternatives considered
-      description: Have you tried another approach or workaround?
-      placeholder: I tried...
-  - type: textarea
-    id: additional_context
-    attributes:
-      label: Additional context
-      description: Add mockups, links, or anything else that would help explain the request.
-  - type: upload
-    id: screenshots
-    attributes:
-      label: Upload screenshots or mockups
-      description: If applicable, add screenshots or mockups to help explain the request.
-    validations:
-      required: false
+      label: Extra context
+      description: Add examples, mockups, server or pack context, or anything else that would help.
   - type: checkboxes
     id: checks
     attributes:
-      label: Before submitting
+      label: Checks
       options:
-        - label: I checked for existing issues or requests covering the same idea.
+        - label: I searched for an existing issue or request first.
           required: true
-        - label: I understand this request is about client-side recipe behavior, UI, compatibility, or configuration.
+        - label: I understand this request should stay within client-side behavior, UI, compatibility, or configuration.
           required: true

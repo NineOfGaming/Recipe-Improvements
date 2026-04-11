@@ -15,25 +15,25 @@ It also adds optional recipe-book browsing, layout, and crafting QoL that remain
 - Detects empty recipe syncs and empty recipe-book replacements and applies a client-side fallback automatically
 - Rebuilds recipe-book entries and the client recipe container used by vanilla systems
 - Prefers server-selected known packs when available, otherwise falls back to vanilla or selected client packs
-- Optional notifications when empty-sync fallback activates: toast, chat, log only, or off
+- notifications when empty-sync fallback activates: toast, chat, log only, or off
 - Server blacklist and whitelist support
-- Optional non-vanilla fallback data from server-selected known packs or selected client packs
-- Optional "Show all recipes" mode to show fallback recipes even if the server has not unlocked them
-- Optional "Show all server-known recipes" mode that only uses server-selected known packs
-- Optional fallback indicator on entries sourced from fallback data
+- non-vanilla fallback data from server-selected known packs or selected client packs
+- "Show all recipes" mode to show fallback recipes even if the server has not unlocked them
+- "Show all server-known recipes" mode that only uses server-selected known packs
+- fallback indicator on entries sourced from fallback data
 - Ingredient lines in recipe-book and overlay recipe tooltips
-- Optional recipe variant ungrouping
-- Optional modified-recipe tabs on crafting, furnace, blast furnace, and smoker recipe books
-- Optional tab tooltips and in-book config button
+- recipe variant ungrouping
+- modified-recipe tabs on crafting, furnace, blast furnace, and smoker recipe books
+- tab tooltips and in-book config button
 - Mouse wheel recipe paging
-- Optional quick-craft shortcuts for crafting recipe-book entries
-- Optional auto-close behavior for the recipe book
-- Optional setting to hide and disable the vanilla recipe book UI
-- Optional setting to prevent the recipe-book screens from shifting the main GUI
-- Optional setting to disable recipe-book animations
+- quick-craft shortcuts for crafting recipe-book entries
+- auto-close behavior for the recipe book
+- setting to hide and disable the vanilla recipe book UI
+- setting to prevent the recipe-book screens from shifting the main GUI
+- setting to disable recipe-book animations
 - Verbose logging and ingredient-tooltip debug keys
 - Config screen powered by YACL
-- Optional REI and JEI bridges to keep recipe viewers in sync with fallback and always-visible recipes
+- REI and JEI bridges to keep recipe viewers in sync with fallback and always-visible recipes
 
 ## Compatibility
 
