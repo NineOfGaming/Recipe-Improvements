@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest an improvement for Recipe QoL
+description: Suggest an improvement for Recipe Improvements
 title: "feature: "
 labels:
   - enhancement
@@ -9,9 +9,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form for feature ideas, UX improvements, and compatibility requests for Recipe QoL.
+        Use this form for feature ideas, UX improvements, and compatibility requests for Recipe Improvements.
 
-        Recipe QoL is client-side only, so requests should stay focused on client behavior, recipe visibility, UI, compatibility, or configuration.
+        Recipe Improvements is client-side only, so requests should stay focused on client behavior, recipe visibility, UI, compatibility, or configuration.
   - type: textarea
     id: problem
     attributes:

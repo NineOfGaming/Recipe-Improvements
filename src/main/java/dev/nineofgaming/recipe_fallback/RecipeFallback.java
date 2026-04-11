@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 public class RecipeFallback implements ClientModInitializer {
     @SuppressWarnings("unused")
-    public static final String MOD_NAME = "Recipe QoL";
+    public static final String MOD_NAME = "Recipe Improvements";
     public static final String MOD_ID = "recipe_fallback";
     @SuppressWarnings("unused")
     public static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(() -> new IllegalStateException("Mod not loaded: " + MOD_ID)).getMetadata().getVersion().getFriendlyString();

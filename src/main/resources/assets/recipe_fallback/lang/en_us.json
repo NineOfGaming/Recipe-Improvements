@@ -1,5 +1,5 @@
 {
-  "recipe_fallback.config.title": "Recipe QoL",
+  "recipe_fallback.config.title": "Recipe Improvements",
 
   "recipe_fallback.config.category.fallback": "Fallback",
   "recipe_fallback.config.category.recipe_book": "Recipe Book",
@@ -26,7 +26,7 @@
   "recipe_fallback.config.enabled.desc.1": "Toggle the mod's fallback behavior.",
   "recipe_fallback.config.enabled.desc.2": "Turning this off while connected will not remove fallback recipes already shown until you reconnect.",
   
-  "recipe_fallback.config.open_button.tooltip": "Open Recipe QoL settings",
+  "recipe_fallback.config.open_button.tooltip": "Open Recipe Improvements settings",
 
   "recipe_fallback.config.notification_mode": "Fallback activation notification",
   "recipe_fallback.config.notification_mode.desc.1": "Controls how the mod reports empty-sync fallback activation.",
@@ -73,7 +73,7 @@
   "recipe_fallback.config.recipe_book.disable_animations.desc.1": "Removes cosmetic bounce and highlight animations from recipe entries and recipe-book tabs.",
 
   "recipe_fallback.config.recipe_book.show_config_button": "Show config button in recipe book",
-  "recipe_fallback.config.recipe_book.show_config_button.desc.1": "Shows the Recipe QoL settings button inside the vanilla recipe book while it is open.",
+  "recipe_fallback.config.recipe_book.show_config_button.desc.1": "Shows the Recipe Improvements settings button inside the vanilla recipe book while it is open.",
   "recipe_fallback.config.recipe_book.show_config_button.desc.2": "Hiding it only removes the in-book shortcut. The config screen is still available elsewhere.",
 
   "recipe_fallback.config.recipe_book.show_modified_tab": "Show modified recipes tab",
@@ -107,11 +107,11 @@
   "recipe_fallback.config.hide_rei_warning.desc.1": "Suppresses REI's partial recipe data warning while empty-sync fallback is active.",
 
   "recipe_fallback.config.rei_bridge_enabled": "Enable REI bridge",
-  "recipe_fallback.config.rei_bridge_enabled.desc.1": "Keeps REI in sync when Recipe QoL adds or removes fallback and always-visible recipes.",
+  "recipe_fallback.config.rei_bridge_enabled.desc.1": "Keeps REI in sync when Recipe Improvements adds or removes fallback and always-visible recipes.",
   "recipe_fallback.config.rei_bridge_enabled.desc.2": "Disable this if REI integration causes issues on your setup.",
 
   "recipe_fallback.config.jei_bridge_enabled": "Enable JEI bridge",
-  "recipe_fallback.config.jei_bridge_enabled.desc.1": "Keeps JEI in sync when Recipe QoL adds or removes fallback and always-visible recipes.",
+  "recipe_fallback.config.jei_bridge_enabled.desc.1": "Keeps JEI in sync when Recipe Improvements adds or removes fallback and always-visible recipes.",
   "recipe_fallback.config.jei_bridge_enabled.desc.2": "Disable this if JEI integration causes issues on your setup.",
 
   "recipe_fallback.config.include_modded_recipes": "Include non-vanilla recipes",
@@ -131,7 +131,7 @@
   "recipe_fallback.config.server_only_show_all_recipes.desc.3": "If the server does not provide data from known packs, or the client cannot load them, no extra recipes are shown.",
   "recipe_fallback.config.server_only_show_all_recipes.desc.4": "This feature is a lot more niche than it seems and may not work as you expect.",
 
-  "recipe_fallback.toast.title": "Recipe QoL",
+  "recipe_fallback.toast.title": "Recipe Improvements",
   "recipe_fallback.message.fallback_activated": "Showing %s fallback recipe entries.",
 
   "recipe_fallback.tooltip.recipe_book_tab.stonecutter": "Stonecutter",

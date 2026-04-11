@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "id": "recipe_fallback",
   "version": "${version}",
-  "name": "Recipe QoL",
+  "name": "Recipe Improvements",
   "description": "Fixes empty recipe syncs via client side fallback and adds recipe-book QoL, tooltip improvements, quick-craft shortcuts, and more.",
   "authors": ["NineOfGaming"],
   "contact": {
-    "homepage": "https://modrinth.com/mod/recipe-qol",
-    "issues": "https://github.com/NineOfGaming/Recipe-QoL/issues"
+    "homepage": "https://modrinth.com/mod/recipe-improvements",
+    "issues": "https://github.com/NineOfGaming/Recipe-Improvements/issues"
   },
   "license": "All-Rights-Reserved",
   "icon": "assets/recipe_fallback/icon.png",
@@ -32,8 +32,8 @@
   "custom": {
     "modmenu": {
       "links": {
-        "Modrinth": "https://modrinth.com/mod/recipe-qol",
-        "GitHub": "https://github.com/NineOfGaming/Recipe-QoL",
+        "Modrinth": "https://modrinth.com/mod/recipe-improvements",
+        "GitHub": "https://github.com/NineOfGaming/Recipe-Improvements",
         "Ko-fi": "https://ko-fi.com/nineofgaming"
       }
     }

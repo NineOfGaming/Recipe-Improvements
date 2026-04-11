@@ -1,13 +1,13 @@
-# Recipe QoL
+# Recipe Improvements
 
-**Recipe QoL** is a client-side Fabric mod focused on restoring missing recipe data when a server sends an empty recipe sync, while also adding recipe visibility controls and vanilla recipe-book improvements.
+**Recipe Improvements** is a client-side Fabric mod focused on restoring missing recipe data when a server sends an empty recipe sync, while also adding recipe visibility controls and vanilla recipe-book improvements.
 
 ## Why use it?
 
 Some servers send empty recipe sync/update packets or empty recipe-book replacements.  
 When that happens, the client can end up with missing recipe book entries, incomplete displays, or broken recipe viewer data.
 
-Recipe QoL detects that case and restores recipe data from server-selected known packs when possible, otherwise from resources already available on your client.  
+Recipe Improvements detects that case and restores recipe data from server-selected known packs when possible, otherwise from resources already available on your client.  
 It also adds optional recipe-book browsing, layout, and crafting QoL that remain useful even when fallback features are not active.
 
 ## Features
@@ -76,7 +76,7 @@ All settings are available from the in-game config screen when Mod Menu is insta
 ## Important notes
 
 - This mod only changes what the client can display. It does not grant recipes on the server and does not bypass server-side crafting logic.
-- Recipe QoL does not know about unsynced server-side recipe changes. If the server sends a custom or modified recipe to the client, the mod leaves it alone. If it does not, the client can only show the version available from fallback data.
+- Recipe Improvements does not know about unsynced server-side recipe changes. If the server sends a custom or modified recipe to the client, the mod leaves it alone. If it does not, the client can only show the version available from fallback data.
 - Empty-sync fallback only activates when the server sends an empty recipe sync or empty recipe-book replacement and the mod is enabled for that server.
 - Fallback data comes from server-selected known packs when available, otherwise from local client resources.
 - "Show all recipes" also works on servers that already send recipe data. It only changes client-side visibility and does not unlock recipes on the server.
