@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Usage and compatibility notes
+    url: https://github.com/NineOfGaming/Recipe-Fallback#readme
+    about: Check the README before filing issues about expected client-side or server-side behavior.

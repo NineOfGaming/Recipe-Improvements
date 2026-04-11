@@ -1,0 +1,34 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.nineofgaming.recipe_fallback.mixins",
+  "plugin": "dev.nineofgaming.recipe_fallback.mixins.RecipeFallbackMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+    "AbstractContainerScreenAccessor",
+    "AbstractContainerScreenMixin",
+    "AbstractRecipeBookScreenMixin",
+    "AbstractRecipeBookScreenAccessor",
+    "ClientConfigurationPacketListenerMixin",
+    "ClientPacketListenerMixin",
+    "ClientRecipeBookAccessor",
+    "ClientRecipeBookMixin",
+    "OverlayRecipeButtonAccessor",
+    "OverlayRecipeComponentMixin",
+    "RecipeBookComponentAccessor",
+    "RecipeBookPageMixin",
+    "RecipeBookTabButtonMixin",
+    "RecipeButtonMixin",
+    "RecipeBookComponentMixin",
+    "ScreenAccessor",
+    "ReiImportantWarningsWidgetMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
