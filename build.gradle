@@ -20,6 +20,12 @@ repositories {
     // for more information about repositories.
     mavenCentral()
 
+    // YACL Quilt parsers missing in dev runtime classpath
+    maven {
+        name = "Quilt"
+        url = "https://maven.quiltmc.org/repository/release/"
+    }
+
     // This is the recommended way to add the Modrinth Maven repository.
     exclusiveContent {
         forRepository {
@@ -31,6 +37,12 @@ repositories {
         filter {
             includeGroup "maven.modrinth"
         }
+    }
+
+    // DevAuth
+    maven {
+        name = "DevAuth"
+        url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
     }
 }
 
@@ -47,6 +59,13 @@ dependencies {
 
     // YetAnotherConfigLib
     modImplementation "maven.modrinth:yacl:${project.yacl_version}"
+
+    // YACL Quilt parsers missing in dev runtime classpath
+    runtimeOnly "org.quiltmc.parsers:json:0.2.1"
+    runtimeOnly "org.quiltmc.parsers:gson:0.2.1"
+
+    // DevAuth
+    modRuntimeOnly "me.djtheredstoner:DevAuth-fabric:1.2.2"
 }
 
 def resourceProperties = [
