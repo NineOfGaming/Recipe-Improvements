@@ -27,11 +27,12 @@ body:
     validations:
       required: true
   - type: textarea
-    id: setup
+    id: problem
     attributes:
-      label: Relevant setup
-      description: Include the server or pack, and any relevant mods like REI, JEI, or Mod Menu.
-      placeholder: Singleplayer, a specific server, a modpack, or any compatibility details that matter.
+      label: What happened?
+      placeholder: Joining the server clears the recipe book and fallback does not rebuild it.
+    validations:
+      required: true
   - type: textarea
     id: steps
     attributes:
@@ -44,12 +45,11 @@ body:
     validations:
       required: true
   - type: textarea
-    id: problem
+    id: setup
     attributes:
-      label: What happened?
-      placeholder: Joining the server clears the recipe book and fallback does not rebuild it.
-    validations:
-      required: true
+      label: Relevant setup
+      description: Include the server or pack, and any relevant mods like REI, JEI, or Mod Menu.
+      placeholder: Singleplayer, a specific server, a modpack, or any compatibility details that matter.
   - type: textarea
     id: logs
     attributes:
