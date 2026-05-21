@@ -1,7 +1,7 @@
 plugins {
-    // https://modmuss50.me/fabric.html
+    // https://fabricmc.net/develop/
     // https://github.com/FabricMC/fabric-loom
-    id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'maven-publish'
 }
 
@@ -49,23 +49,22 @@ repositories {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // ModMenu
-    modImplementation "maven.modrinth:modmenu:${project.modmenu_version}"
+    implementation "maven.modrinth:modmenu:${project.modmenu_version}"
 
     // YetAnotherConfigLib
-    modImplementation "maven.modrinth:yacl:${project.yacl_version}"
+    implementation "maven.modrinth:yacl:${project.yacl_version}"
 
     // YACL Quilt parsers missing in dev runtime classpath
     runtimeOnly "org.quiltmc.parsers:json:0.2.1"
     runtimeOnly "org.quiltmc.parsers:gson:0.2.1"
 
     // DevAuth
-    modRuntimeOnly "me.djtheredstoner:DevAuth-fabric:1.2.2"
+    runtimeOnly "me.djtheredstoner:DevAuth-fabric:1.2.2"
 }
 
 def resourceProperties = [
@@ -74,7 +73,8 @@ def resourceProperties = [
         loader_version   : project.loader_version,
         fabric_version   : project.fabric_version,
         modmenu_version  : project.modmenu_version,
-        yacl_version     : project.yacl_version
+        yacl_version     : project.yacl_version,
+        java_version     : project.java_version
 ]
 
 processResources {
@@ -100,13 +100,19 @@ tasks.withType(JavaCompile).configureEach {
 
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
+    toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
     // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
     // if it is present.
     // If you remove this line, sources will not be generated.
     withSourcesJar()
+}
+
+tasks.withType(JavaExec).configureEach {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
 }
 
 jar {

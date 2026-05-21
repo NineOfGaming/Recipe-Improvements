@@ -3,7 +3,7 @@ package dev.nineofgaming.recipe_fallback.mixins;
 import dev.nineofgaming.recipe_fallback.config.RecipeFallbackConfig;
 import dev.nineofgaming.recipe_fallback.ui.RecipeBookTabTooltipHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookTabButton;
 import net.minecraft.network.chat.Component;
@@ -22,9 +22,9 @@ abstract class RecipeBookTabButtonMixin {
     @Shadow
     public abstract ExtendedRecipeBookCategory getCategory();
 
-    @Inject(method = "renderContents", at = @At("HEAD"))
+    @Inject(method = "extractContents", at = @At("HEAD"))
     private void recipe_fallback$disableRecipeBookTabAnimation(
-            GuiGraphics guiGraphics,
+            GuiGraphicsExtractor guiGraphics,
             int mouseX,
             int mouseY,
             float partialTick,
@@ -35,9 +35,9 @@ abstract class RecipeBookTabButtonMixin {
         }
     }
 
-    @Inject(method = "renderContents", at = @At("TAIL"))
+    @Inject(method = "extractContents", at = @At("TAIL"))
     private void recipe_fallback$showRecipeBookTabTooltip(
-            GuiGraphics guiGraphics,
+            GuiGraphicsExtractor guiGraphics,
             int mouseX,
             int mouseY,
             float partialTick,

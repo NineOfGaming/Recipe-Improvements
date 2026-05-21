@@ -2,7 +2,7 @@ package dev.nineofgaming.recipe_fallback.mixins;
 
 import dev.nineofgaming.recipe_fallback.ui.RecipeBookTooltipHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.recipebook.OverlayRecipeComponent;
 import net.minecraft.network.chat.Component;
@@ -25,9 +25,9 @@ abstract class OverlayRecipeComponentMixin {
     @Shadow
     private List<?> recipeButtons;
 
-    @Inject(method = "render", at = @At("RETURN"))
+    @Inject(method = "extractRenderState", at = @At("RETURN"))
     private void recipe_fallback$renderFallbackTooltip(
-            GuiGraphics guiGraphics,
+            GuiGraphicsExtractor guiGraphics,
             int mouseX,
             int mouseY,
             float partialTick,

@@ -3,7 +3,7 @@ package dev.nineofgaming.recipe_fallback.mixins;
 import dev.nineofgaming.recipe_fallback.ui.RecipeBookTooltipHelper;
 import dev.nineofgaming.recipe_fallback.config.RecipeFallbackConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.recipebook.RecipeButton;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -40,9 +40,9 @@ abstract class RecipeButtonMixin {
         ));
     }
 
-    @Inject(method = "renderWidget", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "extractWidgetRenderState", at = @At("HEAD"), cancellable = true)
     private void recipe_fallback$protectAgainstEmptyRecipeEntries(
-            GuiGraphics guiGraphics,
+            GuiGraphicsExtractor guiGraphics,
             int mouseX,
             int mouseY,
             float partialTick,

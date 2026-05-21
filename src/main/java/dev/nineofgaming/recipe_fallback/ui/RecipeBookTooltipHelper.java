@@ -13,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.display.FurnaceRecipeDisplay;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.RecipeDisplayEntry;
@@ -240,7 +241,8 @@ public final class RecipeBookTooltipHelper {
             case SlotDisplay.WithRemainder withRemainder -> {
                 return summarize(withRemainder.input(), context);
             }
-            case SlotDisplay.ItemStackSlotDisplay(ItemStack stack) -> {
+            case SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate template) -> {
+                ItemStack stack = template.create();
                 if (stack.isEmpty()) {
                     return null;
                 }
@@ -375,7 +377,7 @@ public final class RecipeBookTooltipHelper {
                 return Set.of();
             }
 
-            Set<Identifier> stackTags = new ItemStack(item).getTags()
+            Set<Identifier> stackTags = item.builtInRegistryHolder().tags()
                     .map(TagKey::location)
                     .filter(thisTagId -> I18n.exists(tagAliasTranslationKey(thisTagId)))
                     .collect(Collectors.toCollection(LinkedHashSet::new));
@@ -398,7 +400,7 @@ public final class RecipeBookTooltipHelper {
             Set<Identifier> itemIds = new LinkedHashSet<>();
             for (net.minecraft.world.item.Item item : BuiltInRegistries.ITEM) {
                 ItemStack stack = new ItemStack(item);
-                boolean inTag = stack.getTags().anyMatch(tag -> tag.location().equals(id));
+                boolean inTag = stack.typeHolder().tags().anyMatch(tag -> tag.location().equals(id));
                 if (inTag) {
                     itemIds.add(BuiltInRegistries.ITEM.getKey(item));
                 }
@@ -457,8 +459,10 @@ public final class RecipeBookTooltipHelper {
             case SlotDisplay.Empty ignored -> Set.of();
             case SlotDisplay.AnyFuel ignored -> Set.of();
             case SlotDisplay.WithRemainder withRemainder -> ingredientItemIds(withRemainder.input());
-            case SlotDisplay.ItemStackSlotDisplay(ItemStack stack) ->
-                    stack.isEmpty() ? Set.of() : Set.of(BuiltInRegistries.ITEM.getKey(stack.getItem()));
+            case SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate template) -> {
+                ItemStack stack = template.create();
+                yield stack.isEmpty() ? Set.of() : Set.of(BuiltInRegistries.ITEM.getKey(stack.getItem()));
+            }
             case SlotDisplay.ItemSlotDisplay(net.minecraft.core.Holder<net.minecraft.world.item.Item> item) -> {
                 ItemStack stack = new ItemStack(item);
                 yield stack.isEmpty() ? Set.of() : Set.of(BuiltInRegistries.ITEM.getKey(stack.getItem()));

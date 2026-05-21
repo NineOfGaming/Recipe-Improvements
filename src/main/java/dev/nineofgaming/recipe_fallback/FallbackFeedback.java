@@ -22,7 +22,7 @@ public final class FallbackFeedback {
             }
             case CHAT -> {
                 if (minecraft.player != null) {
-                    minecraft.player.displayClientMessage(message, false);
+                    minecraft.player.sendSystemMessage(message);
                 }
             }
             case TOAST -> SystemToast.add(

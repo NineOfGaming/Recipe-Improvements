@@ -1,6 +1,6 @@
 package dev.nineofgaming.recipe_fallback.ui;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -21,7 +21,7 @@ public final class ConfigTextureButton extends Button {
     }
 
     @Override
-    public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    protected void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.fill(
                 this.getX(),
                 this.getY(),
@@ -46,7 +46,7 @@ public final class ConfigTextureButton extends Button {
         );
 
         if (this.isHoveredOrFocused()) {
-            guiGraphics.renderOutline(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 0xFFFFFFFF);
+            guiGraphics.outline(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 0xFFFFFFFF);
         }
     }
 }

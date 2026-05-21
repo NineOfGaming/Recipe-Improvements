@@ -4,7 +4,7 @@ import dev.nineofgaming.recipe_fallback.config.RecipeFallbackConfig;
 import dev.nineofgaming.recipe_fallback.ui.ConfigTextureButton;
 import dev.nineofgaming.recipe_fallback.ui.RecipeBookAutoCloseHost;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -92,9 +92,9 @@ abstract class AbstractRecipeBookScreenMixin implements RecipeBookAutoCloseHost 
         this.recipe_fallback$updateConfigButtonState();
     }
 
-    @Inject(method = "render", at = @At("HEAD"))
+    @Inject(method = "extractRenderState", at = @At("HEAD"))
     private void recipe_fallback$updateConfigButtonBeforeRender(
-            GuiGraphics guiGraphics,
+            GuiGraphicsExtractor guiGraphics,
             int mouseX,
             int mouseY,
             float partialTick,
@@ -103,9 +103,9 @@ abstract class AbstractRecipeBookScreenMixin implements RecipeBookAutoCloseHost 
         this.recipe_fallback$updateConfigButtonState();
     }
 
-    @Inject(method = "render", at = @At("TAIL"))
+    @Inject(method = "extractRenderState", at = @At("TAIL"))
     private void recipe_fallback$renderConfigButtonOnTop(
-            GuiGraphics guiGraphics,
+            GuiGraphicsExtractor guiGraphics,
             int mouseX,
             int mouseY,
             float partialTick,
@@ -116,7 +116,7 @@ abstract class AbstractRecipeBookScreenMixin implements RecipeBookAutoCloseHost 
         }
 
         guiGraphics.nextStratum();
-        this.recipe_fallback$configButton.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.recipe_fallback$configButton.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
 
         if (this.recipe_fallback$configButton.isHoveredOrFocused()) {
             guiGraphics.setTooltipForNextFrame(
