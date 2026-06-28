@@ -26,7 +26,7 @@ public final class FallbackFeedback {
                 }
             }
             case TOAST -> SystemToast.add(
-                    minecraft.getToastManager(),
+                    minecraft.gui.toastManager(),
                     SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
                     Component.translatable("recipe_fallback.toast.title"),
                     message

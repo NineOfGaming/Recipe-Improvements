@@ -437,7 +437,7 @@ abstract class RecipeBookComponentMixin<T extends RecipeBookMenu> implements Rec
         )) {
             this.recipe_fallback$clearPendingInsertAutoClose();
 
-            Screen screen = Minecraft.getInstance().screen;
+            Screen screen = Minecraft.getInstance().gui.screen();
             if (screen instanceof RecipeBookAutoCloseHost autoCloseHost) {
                 autoCloseHost.recipe_fallback$autoCloseRecipeBook();
             }

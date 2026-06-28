@@ -84,7 +84,7 @@ abstract class AbstractRecipeBookScreenMixin implements RecipeBookAutoCloseHost 
                                 recipe_fallback$configButtonSize,
                                 recipe_fallback$configButtonSize,
                                 tooltip,
-                                button -> Minecraft.getInstance().setScreen(RecipeFallbackConfig.createScreen(screen))
+                                button -> Minecraft.getInstance().setScreenAndShow(RecipeFallbackConfig.createScreen(screen))
                         )
         );
         this.recipe_fallback$configButton.setTooltip(Tooltip.create(tooltip));

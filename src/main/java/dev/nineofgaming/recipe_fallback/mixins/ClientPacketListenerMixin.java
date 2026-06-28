@@ -183,7 +183,7 @@ abstract class ClientPacketListenerMixin {
         recipeBook.rebuildCollections();
         listener.searchTrees().updateRecipes(recipeBook, listener.getLevel());
 
-        Screen screen = minecraft.screen;
+        Screen screen = minecraft.gui.screen();
         if (screen instanceof RecipeUpdateListener recipeUpdateListener) {
             recipeUpdateListener.recipesUpdated();
         }

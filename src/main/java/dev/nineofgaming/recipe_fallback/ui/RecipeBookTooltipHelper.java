@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
@@ -379,7 +380,7 @@ public final class RecipeBookTooltipHelper {
 
             Set<Identifier> stackTags = item.builtInRegistryHolder().tags()
                     .map(TagKey::location)
-                    .filter(thisTagId -> I18n.exists(tagAliasTranslationKey(thisTagId)))
+                    .filter(thisTagId -> translationExists(tagAliasTranslationKey(thisTagId)))
                     .collect(Collectors.toCollection(LinkedHashSet::new));
             if (commonTags == null) {
                 commonTags = stackTags;
@@ -482,12 +483,12 @@ public final class RecipeBookTooltipHelper {
 
     private static Component tagLabel(Identifier tagId) {
         String aliasTranslationKey = tagAliasTranslationKey(tagId);
-        if (I18n.exists(aliasTranslationKey)) {
+        if (translationExists(aliasTranslationKey)) {
             return Component.translatable(aliasTranslationKey);
         }
 
         String translationKey = tagTranslationKey(tagId);
-        if (I18n.exists(translationKey)) {
+        if (translationExists(translationKey)) {
             return Component.translatable(translationKey);
         }
 
@@ -495,7 +496,7 @@ public final class RecipeBookTooltipHelper {
     }
 
     private static boolean hasGenericTagAlias(Identifier tagId) {
-        return I18n.exists(tagAliasTranslationKey(tagId));
+        return translationExists(tagAliasTranslationKey(tagId));
     }
 
     private static String tagAliasTranslationKey(Identifier tagId) {
@@ -508,7 +509,11 @@ public final class RecipeBookTooltipHelper {
 
     private static Component ingredientAliasLabel(String ingredientKey) {
         String translationKey = ingredientAliasTranslationKey(ingredientKey);
-        return I18n.exists(translationKey) ? Component.translatable(translationKey) : null;
+        return translationExists(translationKey) ? Component.translatable(translationKey) : null;
+    }
+
+    private static boolean translationExists(String translationKey) {
+        return Language.getInstance().has(translationKey);
     }
 
     private static String ingredientAliasTranslationKey(String ingredientKey) {

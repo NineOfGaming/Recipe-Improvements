@@ -534,7 +534,7 @@ public final class RecipeFallbackConfig {
             minecraft.getConnection().searchTrees().updateRecipes(recipeBook, minecraft.level);
         }
 
-        Screen screen = minecraft.screen;
+        Screen screen = minecraft.gui.screen();
         if (screen instanceof RecipeUpdateListener recipeUpdateListener) {
             recipeUpdateListener.recipesUpdated();
         }
@@ -610,7 +610,7 @@ public final class RecipeFallbackConfig {
 
             Set<String> candidates = new LinkedHashSet<>();
 
-            if (minecraft.isSingleplayer() || minecraft.isLocalServer()) {
+            if (minecraft.hasSingleplayerServer() || minecraft.isLocalServer()) {
                 candidates.add("singleplayer");
             }
 
