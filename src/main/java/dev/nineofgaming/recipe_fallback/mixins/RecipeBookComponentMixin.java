@@ -6,8 +6,10 @@ import dev.nineofgaming.recipe_fallback.ui.ModifiedRecipeBookCategory;
 import dev.nineofgaming.recipe_fallback.ui.RecipeBookAutoCloseHost;
 import dev.nineofgaming.recipe_fallback.ui.RecipeBookCloseHandler;
 import dev.nineofgaming.recipe_fallback.ui.RecipeBookScrollHandler;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.ClientRecipeBook;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
@@ -41,10 +43,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -57,6 +62,12 @@ abstract class RecipeBookComponentMixin<T extends RecipeBookMenu> implements Rec
 
     @Unique
     private static final int recipe_fallback$maxCraftAllPlacementRounds = 256;
+
+    @Unique
+    private static final boolean recipe_fallback$rbipLoaded = FabricLoader.getInstance().isModLoaded("rbip");
+
+    @Unique
+    private static final String recipe_fallback$rbipPageButtonClass = "dev.zenfyr.rbip.RecipeBookPageButton";
 
     @Final
     @Shadow
@@ -188,6 +199,31 @@ abstract class RecipeBookComponentMixin<T extends RecipeBookMenu> implements Rec
         });
     }
 
+    @Inject(method = "initVisuals", at = @At("TAIL"))
+    private void recipe_fallback$moveRbipPageButtonsNextToCenteredGui(CallbackInfo callbackInfo) {
+        if (!recipe_fallback$rbipLoaded
+                || !RecipeFallbackConfig.shouldPreventRecipeBookGuiShift()
+                || this.widthTooNarrow) {
+            return;
+        }
+
+        for (Field field : RecipeBookComponent.class.getDeclaredFields()) {
+            if (Modifier.isStatic(field.getModifiers())
+                    || !field.getType().getName().equals(recipe_fallback$rbipPageButtonClass)) {
+                continue;
+            }
+
+            try {
+                field.setAccessible(true);
+                if (field.get((RecipeBookComponent<?>) (Object) this) instanceof AbstractWidget widget) {
+                    widget.setPosition(widget.getX() - recipe_fallback$unshiftedLayoutDelta, widget.getY());
+                }
+            } catch (IllegalAccessException ignored) {
+                // RBIP is optional; if its internals change, leave its buttons where RBIP placed them.
+            }
+        }
+    }
+
     @Inject(method = "isVisibleAccordingToBookData", at = @At("HEAD"), cancellable = true)
     private void recipe_fallback$disableVanillaRecipeBookVisibility(CallbackInfoReturnable<Boolean> callbackInfo) {
         if (RecipeFallbackConfig.shouldHideVanillaRecipeBook()) {
@@ -224,34 +260,22 @@ abstract class RecipeBookComponentMixin<T extends RecipeBookMenu> implements Rec
         callbackInfo.setReturnValue(defaultXOrigin - recipe_fallback$unshiftedLayoutDelta);
     }
 
-    @Inject(method = "updateTabs", at = @At("HEAD"), cancellable = true)
-    private void recipe_fallback$moveTabsNextToCenteredGui(
-            boolean filtering,
-            CallbackInfo callbackInfo
+    @ModifyArg(
+            method = "updateTabs",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/screens/recipebook/RecipeBookTabButton;setPosition(II)V"
+            ),
+            index = 0
+    )
+    private int recipe_fallback$moveTabsNextToCenteredGui(
+            int x
     ) {
         if (!RecipeFallbackConfig.shouldPreventRecipeBookGuiShift() || this.widthTooNarrow) {
-            return;
+            return x;
         }
 
-        int baseX = ((this.width - 147) / 2) - this.xOffset - 30 - recipe_fallback$unshiftedLayoutDelta;
-        int baseY = ((this.height - 166) / 2) + 3;
-        int tabSpacing = 27;
-        int visibleIndex = 0;
-
-        for (RecipeBookTabButton tabButton : this.tabButtons) {
-            if (tabButton.getCategory() instanceof SearchRecipeBookCategory) {
-                tabButton.visible = true;
-                tabButton.setPosition(baseX, baseY + (tabSpacing * visibleIndex++));
-                continue;
-            }
-
-            if (tabButton.updateVisibility(this.book)) {
-                tabButton.setPosition(baseX, baseY + (tabSpacing * visibleIndex++));
-                tabButton.startAnimation(this.book, filtering);
-            }
-        }
-
-        callbackInfo.cancel();
+        return x - recipe_fallback$unshiftedLayoutDelta;
     }
 
     @Override
