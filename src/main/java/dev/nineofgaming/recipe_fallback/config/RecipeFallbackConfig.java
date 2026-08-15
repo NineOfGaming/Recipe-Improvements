@@ -534,7 +534,11 @@ public final class RecipeFallbackConfig {
             minecraft.getConnection().searchTrees().updateRecipes(recipeBook, minecraft.level);
         }
 
+        //? if >=26.2 {
         Screen screen = minecraft.gui.screen();
+        //?} else {
+        /*Screen screen = minecraft.screen;
+        *///?}
         if (screen instanceof RecipeUpdateListener recipeUpdateListener) {
             recipeUpdateListener.recipesUpdated();
         }
@@ -610,7 +614,11 @@ public final class RecipeFallbackConfig {
 
             Set<String> candidates = new LinkedHashSet<>();
 
+            //? if >=26.2 {
             if (minecraft.hasSingleplayerServer() || minecraft.isLocalServer()) {
+            //?} else {
+            /*if (minecraft.isSingleplayer() || minecraft.isLocalServer()) {
+            *///?}
                 candidates.add("singleplayer");
             }
 

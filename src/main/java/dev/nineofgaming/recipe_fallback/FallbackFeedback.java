@@ -26,7 +26,11 @@ public final class FallbackFeedback {
                 }
             }
             case TOAST -> SystemToast.add(
+                    //? if >=26.2 {
                     minecraft.gui.toastManager(),
+                    //?} else {
+                    /*minecraft.getToastManager(),
+                    *///?}
                     SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
                     Component.translatable("recipe_fallback.toast.title"),
                     message

@@ -297,7 +297,11 @@ public final class AlwaysVisibleRecipeSync {
         recipeBook.rebuildCollections();
         listener.searchTrees().updateRecipes(recipeBook, listener.getLevel());
 
+        //? if >=26.2 {
         Screen screen = minecraft.gui.screen();
+        //?} else {
+        /*Screen screen = minecraft.screen;
+        *///?}
         if (screen instanceof RecipeUpdateListener recipeUpdateListener) {
             recipeUpdateListener.recipesUpdated();
         }

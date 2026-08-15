@@ -5,10 +5,13 @@ import dev.nineofgaming.recipe_fallback.config.RecipeFallbackConfig;
 import dev.nineofgaming.recipe_fallback.mixins.ClientRecipeBookAccessor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.client.gui.screens.Screen;
+//? if >=26.2 {
 import net.minecraft.locale.Language;
+//?} else {
+/*import net.minecraft.client.resources.language.I18n;
+*///?}
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
@@ -513,7 +516,11 @@ public final class RecipeBookTooltipHelper {
     }
 
     private static boolean translationExists(String translationKey) {
+        //? if >=26.2 {
         return Language.getInstance().has(translationKey);
+        //?} else {
+        /*return I18n.exists(translationKey);
+        *///?}
     }
 
     private static String ingredientAliasTranslationKey(String ingredientKey) {
