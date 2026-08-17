@@ -3,8 +3,6 @@ description: Suggest an improvement for Recipe Improvements
 title: "feature: "
 labels:
   - enhancement
-assignees:
-  - NineOfGaming
 body:
   - type: markdown
     attributes:
