@@ -4,8 +4,11 @@ import dev.nineofgaming.recipe_fallback.config.RecipeFallbackConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
+import org.slf4j.Logger;
 
 public final class FallbackFeedback {
+    private static final Logger LOGGER = RecipeFallback.createLogger("Fallback");
+
     private FallbackFeedback() {
     }
 
@@ -36,14 +39,14 @@ public final class FallbackFeedback {
                     message
             );
             case LOG_ONLY -> {
-                RecipeFallback.LOGGER.info(message.getString());
+                LOGGER.info(message.getString());
             }
         }
     }
 
     public static void verbose(String message, Object... args) {
         if (RecipeFallbackConfig.get().verboseLogging) {
-            RecipeFallback.LOGGER.info(message, args);
+            LOGGER.info(message, args);
         }
     }
 }

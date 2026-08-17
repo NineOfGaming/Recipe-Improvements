@@ -9,11 +9,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
 
 @Mixin(targets = "me.shedaniel.rei.impl.client.gui.hints.ImportantWarningsWidget", remap = false)
 abstract class ReiImportantWarningsWidgetMixin {
+    @Unique
+    private static final Logger LOGGER = RecipeFallback.createLogger("REI");
     @Unique
     private static Field recipe_fallback$visibleField;
     @Unique
@@ -100,6 +103,6 @@ abstract class ReiImportantWarningsWidgetMixin {
         }
 
         recipe_fallback$disabled = true;
-        RecipeFallback.LOGGER.warn("Disabled REI warning suppression after {} failure", action, exception);
+        LOGGER.warn("Disabled REI warning suppression after {} failure", action, exception);
     }
 }

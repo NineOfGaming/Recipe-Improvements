@@ -1,10 +1,10 @@
 package dev.nineofgaming.recipe_fallback.compat;
 
+import dev.nineofgaming.recipe_fallback.RecipeFallback;
 import dev.nineofgaming.recipe_fallback.recipe.FallbackRecipePayload;
 import net.minecraft.world.item.crafting.display.RecipeDisplayEntry;
 import net.minecraft.world.item.crafting.display.RecipeDisplayId;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class RoughlyEnoughItemsBridge {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RoughlyEnoughItemsBridge.class);
+    private static final Logger LOGGER = RecipeFallback.createLogger("REI");
     private static final ReiApi API = loadApi();
     private static final Set<RecipeDisplayId> emptySyncFallbackDisplayIds = ConcurrentHashMap.newKeySet();
     private static final Set<RecipeDisplayId> alwaysVisibleFallbackDisplayIds = ConcurrentHashMap.newKeySet();

@@ -14,6 +14,7 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.RecipeDisplayEntry;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class ModifiedRecipeDisplayLoader {
+    private static final Logger LOGGER = RecipeFallback.createLogger("Modified Recipes");
     private static final Object LOCK = new Object();
     private static final Object SIGNATURE_LOCK = new Object();
 
@@ -87,7 +89,7 @@ public final class ModifiedRecipeDisplayLoader {
         try {
             return loadSnapshot(minecraft, registryAccess, enabledFeatures, false).signatureCounts();
         } catch (RuntimeException exception) {
-            RecipeFallback.LOGGER.error("Failed to classify modified recipe book displays", exception);
+            LOGGER.error("Failed to classify modified recipe book displays", exception);
             return Map.of();
         }
     }

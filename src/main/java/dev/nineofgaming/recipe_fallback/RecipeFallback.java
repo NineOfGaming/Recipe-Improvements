@@ -24,6 +24,10 @@ public class RecipeFallback implements ClientModInitializer {
     public static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).map(container -> container.getMetadata().getVersion().getFriendlyString()).orElse("unknown");
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
+    public static Logger createLogger(String source) {
+        return LoggerFactory.getLogger(MOD_NAME + "/" + source);
+    }
+
     @Override
     public void onInitializeClient() {
         LOGGER.info("Initializing {}", MOD_NAME);

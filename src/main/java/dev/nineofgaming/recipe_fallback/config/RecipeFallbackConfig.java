@@ -21,6 +21,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.Component;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -37,6 +38,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public final class RecipeFallbackConfig {
+    private static final Logger LOGGER = RecipeFallback.createLogger("Config");
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .disableHtmlEscaping()
@@ -69,7 +71,7 @@ public final class RecipeFallbackConfig {
             RecipeBookTooltipHelper.clear();
             refreshRecipeBook();
         } catch (IOException exception) {
-            RecipeFallback.LOGGER.error("Failed to save config to {}", CONFIG_PATH, exception);
+            LOGGER.error("Failed to save config to {}", CONFIG_PATH, exception);
         }
     }
 
@@ -516,7 +518,7 @@ public final class RecipeFallbackConfig {
             loaded.sanitize();
             return loaded;
         } catch (IOException | RuntimeException exception) {
-            RecipeFallback.LOGGER.error("Failed to load config from {}", CONFIG_PATH, exception);
+            LOGGER.error("Failed to load config from {}", CONFIG_PATH, exception);
             return ConfigData.defaults();
         }
     }

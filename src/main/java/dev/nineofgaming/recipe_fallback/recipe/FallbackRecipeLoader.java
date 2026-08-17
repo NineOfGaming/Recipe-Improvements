@@ -6,11 +6,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.packs.resources.CloseableResourceManager;
 import net.minecraft.world.flag.FeatureFlagSet;
+import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
 public final class FallbackRecipeLoader {
+    private static final Logger LOGGER = RecipeFallback.createLogger("Recipe Loader");
     private static final Object LOCK = new Object();
 
     private static CacheKey cachedKey;
@@ -76,7 +78,7 @@ public final class FallbackRecipeLoader {
 
         if (resourceManager == null) {
             if (RecipeFallbackConfig.get().verboseLogging && key.sourceMode() == SourceMode.SERVER_ONLY) {
-                RecipeFallback.LOGGER.info(
+                LOGGER.info(
                         "Skipped server-only Show all recipes because no {} were available",
                         RecipePackResourceFactory.serverKnownDescription(key.includeModdedRecipes())
                 );
@@ -90,7 +92,7 @@ public final class FallbackRecipeLoader {
 
             FallbackRecipePayload payload = recipeManager.createPayload();
             if (RecipeFallbackConfig.get().verboseLogging) {
-                RecipeFallback.LOGGER.info(
+                LOGGER.info(
                         "Loaded {} fallback recipe displays from {}",
                         payload.recipeBookEntries().size(),
                         key.description(minecraft)
@@ -98,7 +100,7 @@ public final class FallbackRecipeLoader {
             }
             return Optional.of(payload);
         } catch (RuntimeException exception) {
-            RecipeFallback.LOGGER.error("Failed to build fallback recipes", exception);
+            LOGGER.error("Failed to build fallback recipes", exception);
             return Optional.empty();
         }
     }

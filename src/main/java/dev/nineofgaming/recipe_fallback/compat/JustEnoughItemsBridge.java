@@ -1,5 +1,6 @@
 package dev.nineofgaming.recipe_fallback.compat;
 
+import dev.nineofgaming.recipe_fallback.RecipeFallback;
 import dev.nineofgaming.recipe_fallback.recipe.FallbackRecipePayload;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
@@ -7,7 +8,6 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeMap;
 import net.minecraft.world.item.crafting.display.RecipeDisplayId;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class JustEnoughItemsBridge {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JustEnoughItemsBridge.class);
+    private static final Logger LOGGER = RecipeFallback.createLogger("JEI");
     private static final JeiApi API = loadApi();
     private static final Map<ResourceKey<Recipe<?>>, RecipeHolder<?>> alwaysVisibleFallbackRecipes =
             new ConcurrentHashMap<>();
