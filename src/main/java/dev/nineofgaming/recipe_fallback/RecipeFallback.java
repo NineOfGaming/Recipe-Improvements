@@ -21,8 +21,8 @@ public class RecipeFallback implements ClientModInitializer {
     public static final String MOD_NAME = "Recipe Improvements";
     public static final String MOD_ID = "recipe_fallback";
     @SuppressWarnings("unused")
-    public static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(() -> new IllegalStateException("Mod not loaded: " + MOD_ID)).getMetadata().getVersion().getFriendlyString();
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).map(container -> container.getMetadata().getVersion().getFriendlyString()).orElse("unknown");
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
     @Override
     public void onInitializeClient() {
