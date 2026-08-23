@@ -174,9 +174,9 @@
   "recipe_fallback.tooltip.tag_alias.minecraft.coals": "Any Coal",
   "recipe_fallback.tooltip.tag_alias.minecraft.dyes": "Any Dye",
   "recipe_fallback.tooltip.tag_alias.minecraft.wooden_tool_materials": "Any Planks",
-  "recipe_fallback.tooltip.tag_alias.minecraft.iron_tools": "Any Iron Tool",
-  "recipe_fallback.tooltip.tag_alias.minecraft.gold_tools": "Any Golden Tool",
-  "recipe_fallback.tooltip.tag_alias.minecraft.copper_tools": "Any Copper Tool",
+  "recipe_fallback.tooltip.tag_alias.minecraft.iron_equipment": "Any Iron Equipment",
+  "recipe_fallback.tooltip.tag_alias.minecraft.gold_equipment": "Any Golden Equipment",
+  "recipe_fallback.tooltip.tag_alias.minecraft.copper_equipment": "Any Copper Equipment",
 
   "recipe_fallback.tooltip.ingredients": "Ingredients:",
   "recipe_fallback.tooltip.more_alternatives": "+%s more",

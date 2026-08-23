@@ -48,7 +48,7 @@ public final class RecipeBookTooltipHelper {
     private static final Map<RecipeDisplayId, List<Component>> ingredientTooltipCache = new ConcurrentHashMap<>();
     private static final Map<Identifier, Set<Identifier>> tagContentsCache = new ConcurrentHashMap<>();
     private static final Map<Identifier, Set<Identifier>> explicitAliasContents = Map.of(
-            vanillaId("iron_tools"),
+            vanillaId("iron_equipment"),
             vanillaIds(
                     "iron_pickaxe",
                     "iron_shovel",
@@ -67,7 +67,7 @@ public final class RecipeBookTooltipHelper {
                     "chainmail_leggings",
                     "chainmail_boots"
             ),
-            vanillaId("gold_tools"),
+            vanillaId("gold_equipment"),
             vanillaIds(
                     "golden_pickaxe",
                     "golden_shovel",
@@ -82,7 +82,7 @@ public final class RecipeBookTooltipHelper {
                     "golden_horse_armor",
                     "golden_nautilus_armor"
             ),
-            vanillaId("copper_tools"),
+            vanillaId("copper_equipment"),
             vanillaIds(
                     "copper_pickaxe",
                     "copper_shovel",
