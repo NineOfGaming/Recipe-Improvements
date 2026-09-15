@@ -20,19 +20,26 @@ import java.util.List;
 import java.util.Map;
 
 final class FallbackRecipeManager extends RecipeManager {
-    FallbackRecipeManager(HolderLookup.Provider registries) {
+    private FallbackRecipeManager(HolderLookup.Provider registries) {
         super(registries);
     }
 
-    void load(ResourceManager resourceManager, FeatureFlagSet enabledFeatures) {
-        RecipeMap preparedRecipes = this.prepare(resourceManager, InactiveProfiler.INSTANCE);
-        this.apply(preparedRecipes, resourceManager, InactiveProfiler.INSTANCE);
-        this.finalizeRecipeLoading(enabledFeatures);
-    }
-
-    void load(RecipeMap syncedRecipes, FeatureFlagSet enabledFeatures) {
-        this.apply(syncedRecipes, ResourceManager.Empty.INSTANCE, InactiveProfiler.INSTANCE);
-        this.finalizeRecipeLoading(enabledFeatures);
+    static FallbackRecipeManager load(
+            HolderLookup.Provider registries,
+            ResourceManager resourceManager,
+            FeatureFlagSet enabledFeatures
+    ) {
+        //? if >=26.3 {
+        FallbackRecipeManager recipeManager = new FallbackRecipeManager(
+                RecipeMapFactory.loadRegistry(resourceManager, registries)
+        );
+        //?} else {
+        /*FallbackRecipeManager recipeManager = new FallbackRecipeManager(registries);
+        RecipeMap preparedRecipes = recipeManager.prepare(resourceManager, InactiveProfiler.INSTANCE);
+        recipeManager.apply(preparedRecipes, resourceManager, InactiveProfiler.INSTANCE);
+        *///?}
+        recipeManager.finalizeRecipeLoading(enabledFeatures);
+        return recipeManager;
     }
 
     FallbackRecipePayload createPayload() {
@@ -56,6 +63,11 @@ final class FallbackRecipeManager extends RecipeManager {
             );
         }
 
-        return new FallbackRecipePayload(container, RecipeMap.create(sortedRecipes), recipeBookEntries, displayRecipeIds);
+        return new FallbackRecipePayload(
+                container,
+                RecipeMapFactory.create(sortedRecipes),
+                recipeBookEntries,
+                displayRecipeIds
+        );
     }
 }

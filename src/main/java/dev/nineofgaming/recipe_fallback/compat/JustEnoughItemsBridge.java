@@ -2,6 +2,7 @@ package dev.nineofgaming.recipe_fallback.compat;
 
 import dev.nineofgaming.recipe_fallback.RecipeFallback;
 import dev.nineofgaming.recipe_fallback.recipe.FallbackRecipePayload;
+import dev.nineofgaming.recipe_fallback.recipe.RecipeMapFactory;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -75,7 +76,7 @@ public final class JustEnoughItemsBridge {
 
             alwaysVisibleFallbackRecipes.clear();
             alwaysVisibleFallbackRecipes.putAll(appliedFallbackRecipes);
-            API.setClientSyncedRecipes().invoke(null, RecipeMap.create(mergedRecipes.values()));
+            API.setClientSyncedRecipes().invoke(null, RecipeMapFactory.create(mergedRecipes.values()));
             fireAfterRecipeSync();
             return true;
         } catch (ReflectiveOperationException exception) {
@@ -95,7 +96,7 @@ public final class JustEnoughItemsBridge {
                     toRecipeMap(currentRecipeMap != null ? currentRecipeMap : RecipeMap.EMPTY);
             stripTrackedFallbackRecipes(currentRecipes);
             alwaysVisibleFallbackRecipes.clear();
-            API.setClientSyncedRecipes().invoke(null, RecipeMap.create(currentRecipes.values()));
+            API.setClientSyncedRecipes().invoke(null, RecipeMapFactory.create(currentRecipes.values()));
             fireAfterRecipeSync();
             return true;
         } catch (ReflectiveOperationException exception) {

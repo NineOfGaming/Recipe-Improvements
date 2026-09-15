@@ -256,8 +256,16 @@ public final class RecipeBookTooltipHelper {
                 ItemStack stack = new ItemStack(item);
                 return new IngredientSummary(item.unwrapKey().map(Object::toString).orElse(stack.toString()), stack.getHoverName(), 1);
             }
-            case SlotDisplay.TagSlotDisplay(net.minecraft.tags.TagKey<net.minecraft.world.item.Item> tag) ->
+            //? if >=26.3 {
+            case SlotDisplay.TagSlotDisplay(net.minecraft.core.HolderSet<net.minecraft.world.item.Item> tag) -> {
+                if (tag.unwrapKey().isPresent()) {
+                    return summarizeTag(tag.unwrapKey().get(), slotDisplay, context);
+                }
+            }
+            //?} else {
+            /*case SlotDisplay.TagSlotDisplay(net.minecraft.tags.TagKey<net.minecraft.world.item.Item> tag) ->
                     summarizeTag(tag, slotDisplay, context);
+            *///?}
             case SlotDisplay.AnyFuel anyFuel -> {
                 return new IngredientSummary("any_fuel", Component.translatable("recipe_fallback.tooltip.any_fuel"), 1);
             }
@@ -471,8 +479,17 @@ public final class RecipeBookTooltipHelper {
                 ItemStack stack = new ItemStack(item);
                 yield stack.isEmpty() ? Set.of() : Set.of(BuiltInRegistries.ITEM.getKey(stack.getItem()));
             }
-            case SlotDisplay.TagSlotDisplay(net.minecraft.tags.TagKey<net.minecraft.world.item.Item> tag) ->
+            //? if >=26.3 {
+            case SlotDisplay.TagSlotDisplay(net.minecraft.core.HolderSet<net.minecraft.world.item.Item> tag) ->
+                    tag.unwrapKey()
+                            .map(key -> tagContents(key.location()))
+                            .orElseGet(() -> tag.stream()
+                                    .map(holder -> BuiltInRegistries.ITEM.getKey(holder.value()))
+                                    .collect(Collectors.toCollection(LinkedHashSet::new)));
+            //?} else {
+            /*case SlotDisplay.TagSlotDisplay(net.minecraft.tags.TagKey<net.minecraft.world.item.Item> tag) ->
                     tagContents(tag.location());
+            *///?}
             case SlotDisplay.Composite(List<SlotDisplay> contents) -> {
                 Set<Identifier> itemIds = new LinkedHashSet<>();
                 for (SlotDisplay content : contents) {

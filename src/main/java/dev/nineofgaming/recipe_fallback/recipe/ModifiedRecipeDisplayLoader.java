@@ -102,8 +102,11 @@ public final class ModifiedRecipeDisplayLoader {
     ) {
         try (CloseableResourceManager resourceManager =
                      RecipePackResourceFactory.createLocal(minecraft, includeSelectedClientPacks)) {
-            FallbackRecipeManager recipeManager = new FallbackRecipeManager(registryAccess);
-            recipeManager.load(resourceManager, enabledFeatures);
+            FallbackRecipeManager recipeManager = FallbackRecipeManager.load(
+                    registryAccess,
+                    resourceManager,
+                    enabledFeatures
+            );
             return RecipeSnapshot.capture(recipeManager, registryAccess);
         }
     }

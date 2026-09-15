@@ -77,7 +77,13 @@ final class RecipePackResourceFactory {
 
     private static List<PackResources> createLocalPackResources(Minecraft minecraft, boolean includeSelectedClientPacks) {
         if (!includeSelectedClientPacks) {
-            return List.of(new NonClosingPackResources(minecraft.getVanillaPackResources()));
+            return List.of(new NonClosingPackResources(
+                    //? if >=26.3 {
+                    minecraft.getVanillaPackResources().fullResources()
+                    //?} else {
+                    /*minecraft.getVanillaPackResources()
+                    *///?}
+            ));
         }
 
         PackRepository repository = minecraft.getResourcePackRepository();
@@ -86,16 +92,32 @@ final class RecipePackResourceFactory {
 
         for (Pack pack : repository.getSelectedPacks()) {
             if (isVanillaPack(pack)) {
-                resources.add(new NonClosingPackResources(minecraft.getVanillaPackResources()));
+                resources.add(new NonClosingPackResources(
+                        //? if >=26.3 {
+                        minecraft.getVanillaPackResources().fullResources()
+                        //?} else {
+                        /*minecraft.getVanillaPackResources()
+                        *///?}
+                ));
                 includedVanilla = true;
                 continue;
             }
 
-            resources.add(pack.open());
+            //? if >=26.3 {
+            pack.open().forEach(resources::add);
+            //?} else {
+            /*resources.add(pack.open());
+            *///?}
         }
 
         if (!includedVanilla) {
-            resources.addFirst(new NonClosingPackResources(minecraft.getVanillaPackResources()));
+            resources.addFirst(new NonClosingPackResources(
+                    //? if >=26.3 {
+                    minecraft.getVanillaPackResources().fullResources()
+                    //?} else {
+                    /*minecraft.getVanillaPackResources()
+                    *///?}
+            ));
         }
 
         return resources;

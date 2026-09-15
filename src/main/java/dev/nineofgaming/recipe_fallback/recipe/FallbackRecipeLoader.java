@@ -87,8 +87,11 @@ public final class FallbackRecipeLoader {
         }
 
         try (CloseableResourceManager closeableResourceManager = resourceManager) {
-            FallbackRecipeManager recipeManager = new FallbackRecipeManager(registryAccess);
-            recipeManager.load(closeableResourceManager, key.enabledFeatures());
+            FallbackRecipeManager recipeManager = FallbackRecipeManager.load(
+                    registryAccess,
+                    closeableResourceManager,
+                    key.enabledFeatures()
+            );
 
             FallbackRecipePayload payload = recipeManager.createPayload();
             if (RecipeFallbackConfig.get().verboseLogging) {

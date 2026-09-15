@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RecipeFallback implements ClientModInitializer {
-    @SuppressWarnings("unused")
     public static final String MOD_NAME = "Recipe Improvements";
     public static final String MOD_ID = "recipe_fallback";
     @SuppressWarnings("unused")
